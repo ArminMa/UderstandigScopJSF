@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+              http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+              version="2.2">
+
+    <!--@RequestScoped              request-->
+    <!--@ViewScoped                 view-->
+    <!--@FlowScoped                 flow-->
+    <!--@SessionScoped              session-->
+    <!--@ApplicationScoped          application-->
+    <!--@NoneScoped                 none-->
+
+    <!--<managed-bean>-->
+        <!--<managed-bean-name>countBean</managed-bean-name>-->
+        <!--<managed-bean-class>org.kht.jsf.CountBean</managed-bean-class>-->
+        <!--<managed-bean-scope>request</managed-bean-scope>-->
+    <!--</managed-bean>-->
+
+    <!--<managed-bean>-->
+        <!--<managed-bean-name>manualScopeManagerBean</managed-bean-name>-->
+        <!--<managed-bean-class>org.kht.jsf.manualScope.ManualScopeManagerBean</managed-bean-class>-->
+        <!--<managed-bean-scope>none</managed-bean-scope>-->
+    <!--</managed-bean>-->
+
+    <!--<managed-bean>-->
+        <!--<managed-bean-name>applicationScopedBean</managed-bean-name>-->
+        <!--<managed-bean-class>org.kht.jsf.ApplicationScopedBean</managed-bean-class>-->
+        <!--<managed-bean-scope>application</managed-bean-scope>-->
+    <!--</managed-bean>-->
+
+    <!--<managed-bean>-->
+        <!--<managed-bean-name>sessionScopedBean</managed-bean-name>-->
+        <!--<managed-bean-class>org.kht.jsf.SessionScopedBean</managed-bean-class>-->
+        <!--<managed-bean-scope>session</managed-bean-scope>-->
+    <!--</managed-bean>-->
+
+    <!--<managed-bean>-->
+        <!--<managed-bean-name>changeTracker</managed-bean-name>-->
+        <!--<managed-bean-class>org.kht.jsf.ChangeTracker</managed-bean-class>-->
+        <!--<managed-bean-scope>application</managed-bean-scope>-->
+    <!--</managed-bean>-->
+
+    <!--<managed-bean>-->
+        <!--<managed-bean-name>clientWindowBean</managed-bean-name>-->
+        <!--<managed-bean-class>org.kht.jsf.manualScope.ClientWindowBean</managed-bean-class>-->
+        <!--<managed-bean-scope>request</managed-bean-scope>-->
+    <!--</managed-bean>-->
+
+    <!--<managed-bean>-->
+        <!--<managed-bean-name>noneScopedBean</managed-bean-name>-->
+        <!--<managed-bean-class>org.kht.jsf.NoneScopedBean</managed-bean-class>-->
+        <!--<managed-bean-scope>none</managed-bean-scope>-->
+    <!--</managed-bean>-->
+
+    <!--<managed-bean>-->
+        <!--<managed-bean-name>viewScopedBean</managed-bean-name>-->
+        <!--<managed-bean-class>org.kht.jsf.ViewScopedBean</managed-bean-class>-->
+        <!--<managed-bean-scope>view</managed-bean-scope>-->
+    <!--</managed-bean>-->
+
+
+
+
+    <!--<application>-->
+        <!--<el-resolver>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerELResolver</el-resolver>-->
+    	<!--<el-resolver>org.kht.jsf.beyondViewScope.BeyondViewScopeELResolver</el-resolver>-->
+    	<!--<el-resolver>org.kht.jsf.manualScope.ManualScopeELResolver</el-resolver>-->
+        <!--<navigation-handler>org.kht.jsf.beyondViewScope.BeyondViewScopeNavigationHandler</navigation-handler>-->
+        <!--<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>-->
+        <!--<el-resolver>org.springframework.web.jsf.el.WebApplicationContextFacesELResolver</el-resolver>-->
+    <!--</application>-->
+
+    <application>
+        <el-resolver>org.kht.jsf.beyondViewScope.BeyondViewScopeELResolver</el-resolver>
+        <el-resolver>org.kht.jsf.manualScope.ManualScopeELResolver</el-resolver>
+        <variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+        <navigation-handler>org.kht.jsf.beyondViewScope.BeyondViewScopeNavigationHandler</navigation-handler>
+
+
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+    </application>
+
+
+
+</faces-config>

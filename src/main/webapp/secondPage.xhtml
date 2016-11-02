@@ -1,0 +1,88 @@
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.w3c.org/1999/xhtml
+		http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"
+
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:prime="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>#{menuController.title}</title>
+        <style>body {  font-size: 12px;  }</style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <prime:panel header="What do you see here?">
+                <div style="height:50px">
+                    This is the second page of the scope demo. Each time you navigate to another
+                    JSF page, the old view scope is discarded and a new one is create. In the example below the corresponding
+                    counters start with 1 again.
+                </div>
+            </prime:panel>
+
+            <prime:panel header="Second JSF View of the scope demo">
+                <prime:commandButton value="Count! (AJAX)" action="#{countBean.onClick}" ajax="true" update="@form"/>
+                <prime:commandButton value="Count! (Non-AJAX)" action="#{countBean.onClick}" ajax="false" style="width:150px"/>
+                <prime:commandButton value="forced reload (F5 key)" onclick="window.location='secondPage.xhtml '" style="width:170px"/>
+                <prime:commandButton value="leave secondPage scopes" action="index.html?faces-redirect=true" ajax="false" style="width:200px"/>
+                <prime:commandButton value="start custom scope" actionListener="#{manualScopeManagerBean.createScope}" update="@form" style="width:150px"/>
+                <prime:commandButton value="destroy custom scope" actionListener="#{manualScopeManagerBean.destroyScope}" update="@form" style="width:170px"/>
+
+                <prime:panelGrid columns="5">
+                    <prime:outputLabel value="JSF Scopes" style="font-weight:bold" />
+                    <prime:outputLabel value="First call" style="font-weight:bold" />
+                    <prime:outputLabel value="Second call" style="font-weight:bold"/>
+                    <prime:outputLabel value="Third call" style="font-weight:bold"/>
+                    <prime:outputLabel value="Comment" style="font-weight:bold"/>
+
+                    <prime:outputLabel value="JSF application scope" />
+                    <prime:outputLabel value="#{changeTracker.track(1, applicationScopedBean.counter)}" style="#{changeTracker.getStyle(1)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(2, applicationScopedBean.counter)}" style="#{changeTracker.getStyle(2)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(3, applicationScopedBean.counter)}" style="#{changeTracker.getStyle(3)}"/>
+                    <prime:outputLabel value="Open a second browser to see the difference between session and application scope" />
+
+                    <prime:outputLabel value="JSF session scope" />
+                    <prime:outputLabel value="#{changeTracker.track(11, sessionScopedBean.counter)}" style="#{changeTracker.getStyle(11)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(12, sessionScopedBean.counter)}" style="#{changeTracker.getStyle(12)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(13, sessionScopedBean.counter)}" style="#{changeTracker.getStyle(13)}"/>
+                    <prime:outputLabel value="Click 'Jump to second page' to see the difference to View scope" />
+
+                    <prime:outputLabel value="JSF view scope" />
+                    <prime:outputLabel value="#{changeTracker.track(21, viewScopedBean.counter)}" style="#{changeTracker.getStyle(21)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(22, viewScopedBean.counter)}" style="#{changeTracker.getStyle(22)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(23, viewScopedBean.counter)}" style="#{changeTracker.getStyle(23)}"/>
+                    <prime:outputLabel value="Adding a space to the URL and hitting the F5 key resets the counter. Clicking the AJAX button 'Count' doesn't." />
+
+                    <prime:outputLabel value="JSF request scope" />
+                    <prime:outputLabel value="#{changeTracker.track(31, requestScopedBean.counter)}" style="#{changeTracker.getStyle(31)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(32, requestScopedBean.counter)}" style="#{changeTracker.getStyle(32)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(33, requestScopedBean.counter)}" style="#{changeTracker.getStyle(33)}"/>
+                    <prime:outputLabel value="Only the values entered by the user or defined during processing the request are stored in the request scope." />
+
+                    <prime:outputLabel value="JSF none scope" />
+                    <prime:outputLabel value="#{changeTracker.track(41, noneScopedBean.counter)}" style="#{changeTracker.getStyle(41)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(42, noneScopedBean.counter)}" style="#{changeTracker.getStyle(42)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(43, noneScopedBean.counter)}" style="#{changeTracker.getStyle(43)}"/>
+                    <prime:outputLabel value="New instance every on every access" />
+
+                    <prime:outputLabel value="JSF custom scope: ManualScope" />
+                    <prime:outputLabel value="#{changeTracker.track(51, manualScopedBean.counter)}" style="#{changeTracker.getStyle(51)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(52, manualScopedBean.counter)}" style="#{changeTracker.getStyle(52)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(53, manualScopedBean.counter)}" style="#{changeTracker.getStyle(53)}"/>
+                    <prime:outputLabel value="Scope existent: #{! empty sessionScope['ManualScope']}" />
+
+                    <prime:outputLabel value="JSF custom scope: BeyondViewScope" />
+                    <prime:outputLabel value="#{changeTracker.track(61, beyondViewScopedBean.counter)}" style="#{changeTracker.getStyle(61)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(62, beyondViewScopedBean.counter)}" style="#{changeTracker.getStyle(62)}"/>
+                    <prime:outputLabel value="#{changeTracker.track(63, beyondViewScopedBean.counter)}" style="#{changeTracker.getStyle(63)}"/>
+                    <prime:outputLabel value="This scope is slightly more persistent than @ViewScoped. It 'survives' a page reload forced by the F5 key (even if the user is adding a space behind the URL to get rid of the previous input)" />
+
+                </prime:panelGrid>
+            </prime:panel>
+        </h:form>
+    </h:body>
+</f:view>
