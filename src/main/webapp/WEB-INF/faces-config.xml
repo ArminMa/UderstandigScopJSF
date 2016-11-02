@@ -75,7 +75,6 @@
     <application>
         <el-resolver>org.kht.jsf.beyondViewScope.BeyondViewScopeELResolver</el-resolver>
         <el-resolver>org.kht.jsf.manualScope.ManualScopeELResolver</el-resolver>
-        <variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
         <navigation-handler>org.kht.jsf.beyondViewScope.BeyondViewScopeNavigationHandler</navigation-handler>
 
 
